@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>San Valentín 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: #ffd6e7;
+    font-family: 'Poppins', sans-serif;
+    overflow: hidden;
+}
+
+/* Corazones flotando */
+.heart {
+    position: absolute;
+    color: rgba(255, 77, 136, 0.35);
+    font-size: 40px;
+    animation: float 10s linear infinite;
+}
+
+@keyframes float {
+    from {
+        transform: translateY(100vh);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+/* Contenedor principal */
+.contenido {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.95);
+    padding: 45px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0px 15px 35px rgba(0,0,0,0.12);
+}
+
+h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 48px;
+    color: #d63384; /* Más visible */
+    margin-bottom: 20px;
+}
+
+/* Botones */
+button {
+    padding: 14px 28px;
+    margin: 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+#si {
+    background-color: #ff4d88;
+    color: white;
+}
+
+#no {
+    background-color: #cccccc;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+/* Mensaje final */
+.respuesta {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(255,255,255,0.97);
+    padding: 60px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0px 15px 35px rgba(0,0,0,0.15);
+}
+
+.respuesta h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 42px;
+    color: #c2185b; /* Más fuerte y legible */
+    line-height: 1.4;
+}
+
+/* Texto pequeño esquina */
+.esquina {
+    position: absolute;
+    bottom: 12px;
+    right: 18px;
+    font-size: 13px;
+    color: #a61e5c;
+}
+</style>
+</head>
+
+<body>
+
+<div id="hearts-container"></div>
+
+<div class="contenido" id="contenido">
+    <h1>¿Quieres ser mi San Valentín? 💕</h1>
+    <button id="si" onclick="decirSi()">Sí</button>
+    <button id="no" onclick="hacerNoMasPequeno()">No</button>
+</div>
+
+<div class="respuesta" id="respuesta">
+    <h2>
+        Igual no tenías opción 💗<br>
+        Te amo ♡<br><br>
+        Envíame un pantallazo de esto y probablemente pase algo más tarde...
+    </h2>
+</div>
+
+<div class="esquina">No se vale decir que no</div>
+
+<!-- Música -->
+<audio id="musica" loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+let tamañoSi = 18;
+
+function hacerNoMasPequeno() {
+    let botonSi = document.getElementById("si");
+    let botonNo = document.getElementById("no");
+
+    tamañoSi += 12;
+    botonSi.style.fontSize = tamañoSi + "px";
+
+    botonNo.style.transform = "scale(0.7)";
+}
+
+function decirSi() {
+    document.getElementById("contenido").style.display = "none";
+    document.getElementById("respuesta").style.display = "block";
+
+    let musica = document.getElementById("musica");
+    musica.volume = 0.3;
+    musica.play();
+}
+
+/* Generar corazones */
+function crearCorazones() {
+    const container = document.getElementById("hearts-container");
+
+    setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "❤";
+
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (30 + Math.random() * 30) + "px";
+        heart.style.animationDuration = (6 + Math.random() * 4) + "s";
+
+        container.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 10000);
+
+    }, 500);
+}
+
+crearCorazones();
+</script>
+
+</body>
+</html>
